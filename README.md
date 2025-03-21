@@ -1,4 +1,5 @@
 Bank App with Swing and MySQL
+
 A simple bank application with a graphical user interface developed in Java using the Swing framework.
 The application interacts with a MySQL database to perform essential banking operations.
 Features
