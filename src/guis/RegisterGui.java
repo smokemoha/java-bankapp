@@ -3,239 +3,191 @@ package guis;
 import db_objs.MyJDBC;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/*
+    This class represents a graphical user interface (GUI) for registering a new user in a banking application.
+    It extends BaseFrame, a presumed custom class that provides a basic JFrame setup, requiring us to implement
+    the abstract method addGuiComponents() to define the layout and behavior of this registration window.
+ */
 public class RegisterGui extends BaseFrame {
-    
-    // Define colors for the theme
-    private static final Color DARK_PURPLE = new Color(75, 0, 130);
-    private static final Color LIGHT_PURPLE = new Color(147, 112, 219);
-    private static final Color ACCENT_COLOR = new Color(186, 85, 211);
-    private static final Color TEXT_COLOR = Color.WHITE;
-    private static final Color FIELD_BACKGROUND = new Color(245, 245, 255);
-    
+    // Constructor that sets the window title by passing it to the BaseFrame superclass
     public RegisterGui() {
         super("Banking App Register");
     }
 
+    // Override the abstract method from BaseFrame to add and configure all GUI components
     @Override
     protected void addGuiComponents() {
-        // Set background gradient panel
-        setContentPane(new GradientPanel());
-        setLayout(null);
-        
-        // Create banking app label with stylish look
+        // Create a title label for the banking application
         JLabel bankingAppLabel = new JLabel("Banking Application");
+
+        // Set the position (x, y) and size (width, height) of the label
+        // x=0 aligns left, y=20 adds top padding, width matches frame width, height=40
         bankingAppLabel.setBounds(0, 20, super.getWidth(), 40);
-        bankingAppLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
-        bankingAppLabel.setForeground(TEXT_COLOR);
+
+        // Use a bold, large font to make the title prominent
+        bankingAppLabel.setFont(new Font("Dialog", Font.BOLD, 32));
+
+        // Center the text horizontally within the label
         bankingAppLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Add the label to the frame (inherited from BaseFrame)
         add(bankingAppLabel);
 
-        // Create a main panel to hold form components
-        JPanel formPanel = new JPanel(null);
-        formPanel.setOpaque(false);
-        formPanel.setBounds(20, 80, getWidth() - 40, 390);
-        add(formPanel);
+        // Create a label for the username input field
+        JLabel usernameLabel = new JLabel("Username:");
 
-        // Username label with improved style
-        JLabel usernameLabel = new JLabel("Username");
-        usernameLabel.setBounds(10, 10, formPanel.getWidth() - 20, 24);
-        usernameLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        usernameLabel.setForeground(TEXT_COLOR);
-        formPanel.add(usernameLabel);
+        // Position it at x=20 (left margin), y=120 (below title), with nearly full width and height of 24
+        // getWidth() returns the frame's width (e.g., 420), adjusted for margins
+        usernameLabel.setBounds(20, 120, getWidth() - 30, 24);
 
-        // Styled username field
+        // Plain font style with size 20 for readability
+        usernameLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        add(usernameLabel);
+
+        // Create a text field for the user to enter their username
         JTextField usernameField = new JTextField();
-        usernameField.setBounds(10, 40, formPanel.getWidth() - 20, 40);
-        usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        usernameField.setBackground(FIELD_BACKGROUND);
-        usernameField.setForeground(DARK_PURPLE);
-        usernameField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(ACCENT_COLOR, 1, true),
-                new EmptyBorder(5, 10, 5, 10)));
-        formPanel.add(usernameField);
 
-        // Password label with improved style
-        JLabel passwordLabel = new JLabel("Password");
-        passwordLabel.setBounds(10, 90, formPanel.getWidth() - 20, 24);
-        passwordLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        passwordLabel.setForeground(TEXT_COLOR);
-        formPanel.add(passwordLabel);
+        // Position it below the username label, spanning most of the frame's width with a height of 40
+        usernameField.setBounds(20, 160, getWidth() - 50, 40);
 
-        // Styled password field
+        // Larger font for the input text to enhance visibility
+        usernameField.setFont(new Font("Dialog", Font.PLAIN, 28));
+        add(usernameField);
+
+        // Create a label for the password input field
+        JLabel passwordLabel = new JLabel("Password:");
+
+        // Position it below the username field (y=220) with similar width and height constraints
+        passwordLabel.setBounds(20, 220, getWidth() - 50, 24);
+
+        // Consistent plain font style with size 20
+        passwordLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        add(passwordLabel);
+
+        // Create a password field (masks input with dots) for secure password entry
         JPasswordField passwordField = new JPasswordField();
-        passwordField.setBounds(10, 120, formPanel.getWidth() - 20, 40);
-        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        passwordField.setBackground(FIELD_BACKGROUND);
-        passwordField.setForeground(DARK_PURPLE);
-        passwordField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(ACCENT_COLOR, 1, true),
-                new EmptyBorder(5, 10, 5, 10)));
-        formPanel.add(passwordField);
 
-        // Re-type password label
-        JLabel rePasswordLabel = new JLabel("Re-type Password");
-        rePasswordLabel.setBounds(10, 170, formPanel.getWidth() - 20, 24);
-        rePasswordLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        rePasswordLabel.setForeground(TEXT_COLOR);
-        formPanel.add(rePasswordLabel);
+        // Position it below the password label, matching the username field's width and height
+        passwordField.setBounds(20, 260, getWidth() - 50, 40);
 
-        // Styled re-type password field
+        // Use the same large font as the username field for consistency
+        passwordField.setFont(new Font("Dialog", Font.PLAIN, 28));
+        add(passwordField);
+
+        // Create a label for the re-type password field to confirm the password
+        JLabel rePasswordLabel = new JLabel("Re-type Password:");
+
+        // Position it below the password field (y=320) with a slightly taller height for alignment
+        rePasswordLabel.setBounds(20, 320, getWidth() - 50, 40);
+
+        // Plain font style with size 20, consistent with other labels
+        rePasswordLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        add(rePasswordLabel);
+
+        // Create a second password field for re-entering the password
         JPasswordField rePasswordField = new JPasswordField();
-        rePasswordField.setBounds(10, 200, formPanel.getWidth() - 20, 40);
-        rePasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        rePasswordField.setBackground(FIELD_BACKGROUND);
-        rePasswordField.setForeground(DARK_PURPLE);
-        rePasswordField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(ACCENT_COLOR, 1, true),
-                new EmptyBorder(5, 10, 5, 10)));
-        formPanel.add(rePasswordField);
 
-        // Stylish register button with hover effect
-        JButton registerButton = new JButton("REGISTER");
-        registerButton.setBounds(10, 270, formPanel.getWidth() - 20, 45);
-        registerButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        registerButton.setForeground(TEXT_COLOR);
-        registerButton.setBackground(ACCENT_COLOR);
-        registerButton.setFocusPainted(false);
-        registerButton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        registerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
-        // Add hover effect
-        registerButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                registerButton.setBackground(DARK_PURPLE);
-            }
-            
-            @Override
-            public void mouseExited(MouseEvent e) {
-                registerButton.setBackground(ACCENT_COLOR);
-            }
-        });
-        
+        // Position it below the re-type password label, matching other input fields
+        rePasswordField.setBounds(20, 360, getWidth() - 50, 40);
+
+        // Consistent large font for input visibility
+        rePasswordField.setFont(new Font("Dialog", Font.PLAIN, 28));
+        add(rePasswordField);
+
+        // Create a button to submit the registration details
+        JButton registerButton = new JButton("Register");
+
+        // Position it near the bottom (y=460) with full width minus margins, and a height of 40
+        registerButton.setBounds(20, 460, getWidth() - 50, 40);
+
+        // Bold font to highlight the button's importance
+        registerButton.setFont(new Font("Dialog", Font.BOLD, 20));
+
+        // Add an action listener to handle the button click event
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // get username
+                // Retrieve the entered username
                 String username = usernameField.getText();
 
-                // get password
+                // Retrieve the password as a char array and convert it to a String
                 String password = String.valueOf(passwordField.getPassword());
 
-                // get re password
+                // Retrieve the re-typed password as a char array and convert it to a String
                 String rePassword = String.valueOf(rePasswordField.getPassword());
 
-                // we will need to validate the user input
-                if(validateUserInput(username, password, rePassword)){
-                    // attempt to register the user to the database
-                    if(MyJDBC.register(username, password)){
-                        // register success
-                        // dispose of this gui
+                // Validate the user input using a helper method
+                if (validateUserInput(username, password, rePassword)) {
+                    // If input is valid, attempt to register the user in the database
+                    if (MyJDBC.register(username, password)) {
+                        // Registration successful: close the current window
                         RegisterGui.this.dispose();
 
-                        // launch the login gui
+                        // Open the login GUI for the user to sign in
                         LoginGui loginGui = new LoginGui();
                         loginGui.setVisible(true);
 
-                        // create a result dialog
+                        // Show a success message attached to the login GUI
                         JOptionPane.showMessageDialog(loginGui, "Registered Account Successfully!");
-                    }else{
-                        // register failed
+                    } else {
+                        // Registration failed (e.g., username already exists)
                         JOptionPane.showMessageDialog(RegisterGui.this, "Error: Username already taken");
                     }
-                }else{
-                    // invalid user input
+                } else {
+                    // Input validation failed: show an error message with specific requirements
                     JOptionPane.showMessageDialog(RegisterGui.this,
                             "Error: Username must be at least 6 characters\n" +
                             "and/or Password must match");
                 }
             }
         });
-        formPanel.add(registerButton);
+        add(registerButton);
 
-        // User requirements hint label
-        JLabel hintLabel = new JLabel("<html><small>Username must be at least 6 characters</small></html>");
-        hintLabel.setBounds(10, 320, formPanel.getWidth() - 20, 20);
-        hintLabel.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-        hintLabel.setForeground(new Color(230, 230, 255));
-        formPanel.add(hintLabel);
+        // Create a clickable label for users who already have an account
+        // HTML is used to style it as a hyperlink
+        JLabel loginLabel = new JLabel("<html><a href=\"#\">Have an account? Sign-in here</a></html>");
 
-        // Create login label with stylish look
-        JLabel loginLabel = new JLabel("<html><a style='color:#E0E0FF;'>Have an account? Sign-in here</a></html>");
-        loginLabel.setBounds(0, 480, getWidth() - 10, 30);
-        loginLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        loginLabel.setForeground(TEXT_COLOR);
+        // Position it at the bottom (y=510), centered across the frame's width
+        loginLabel.setBounds(0, 510, getWidth() - 10, 30);
+
+        // Plain font style with size 20 for readability
+        loginLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+
+        // Center the text horizontally
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        loginLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // Add hover effect
+        // Add a mouse listener to handle clicks on the login label
         loginLabel.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                loginLabel.setText("<html><a style='color:#FFC0FF;'>Have an account? Sign-in here</a></html>");
-            }
-            
-            @Override
-            public void mouseExited(MouseEvent e) {
-                loginLabel.setText("<html><a style='color:#E0E0FF;'>Have an account? Sign-in here</a></html>");
-            }
-            
-            @Override
             public void mouseClicked(MouseEvent e) {
-                // dispose of this gui
+                // Close the current registration window
                 RegisterGui.this.dispose();
 
-                // launch the login gui
+                // Open the login GUI for existing users
                 new LoginGui().setVisible(true);
             }
         });
         add(loginLabel);
     }
 
+    // Helper method to validate user input before attempting registration
     private boolean validateUserInput(String username, String password, String rePassword) {
-        // all fields must have a value
-        if(username.length() == 0 || password.length() == 0 || rePassword.length() == 0) return false;
+        // Check that all fields are non-empty
+        if (username.length() == 0 || password.length() == 0 || rePassword.length() == 0) return false;
 
-        // username has to be at least 6 characters long
-        if(username.length() < 6) return false;
+        // Ensure the username is at least 6 characters long for security
+        if (username.length() < 6) return false;
 
-        // password and repassword must be the same
-        if(!password.equals(rePassword)) return false;
+        // Verify that the password and re-typed password match
+        if (!password.equals(rePassword)) return false;
 
-        // passes validation
+        // If all checks pass, the input is valid
         return true;
-    }
-    
-    // Inner class for gradient background
-    private class GradientPanel extends JPanel {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            Graphics2D g2d = (Graphics2D) g.create();
-            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            
-            int w = getWidth();
-            int h = getHeight();
-            
-            // Create gradient from dark to light purple
-            GradientPaint gradient = new GradientPaint(0, 0, DARK_PURPLE, 0, h, LIGHT_PURPLE);
-            g2d.setPaint(gradient);
-            g2d.fillRect(0, 0, w, h);
-            
-            // Add a subtle pattern overlay
-            g2d.setColor(new Color(255, 255, 255, 15));
-            for (int i = 0; i < h; i += 5) {
-                g2d.drawLine(0, i, w, i);
-            }
-            
-            g2d.dispose();
-        }
     }
 }
