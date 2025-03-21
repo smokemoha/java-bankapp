@@ -1,80 +1,125 @@
 package guis;
 
-
 import db_objs.MyJDBC;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class RegisterGui extends BaseFrame{
-    public RegisterGui(){
+public class RegisterGui extends BaseFrame {
+    
+    // Define colors for the theme
+    private static final Color DARK_PURPLE = new Color(75, 0, 130);
+    private static final Color LIGHT_PURPLE = new Color(147, 112, 219);
+    private static final Color ACCENT_COLOR = new Color(186, 85, 211);
+    private static final Color TEXT_COLOR = Color.WHITE;
+    private static final Color FIELD_BACKGROUND = new Color(245, 245, 255);
+    
+    public RegisterGui() {
         super("Banking App Register");
     }
 
     @Override
     protected void addGuiComponents() {
-        // create banking app label
+        // Set background gradient panel
+        setContentPane(new GradientPanel());
+        setLayout(null);
+        
+        // Create banking app label with stylish look
         JLabel bankingAppLabel = new JLabel("Banking Application");
-
-        // set the location and the size of the gui component
         bankingAppLabel.setBounds(0, 20, super.getWidth(), 40);
-
-        // change the font style
-        bankingAppLabel.setFont(new Font("Dialog", Font.BOLD, 32));
-
-        // center text in Jlabel
+        bankingAppLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        bankingAppLabel.setForeground(TEXT_COLOR);
         bankingAppLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // add to gui
         add(bankingAppLabel);
 
-        // username label
-        JLabel usernameLabel = new JLabel("Username:");
+        // Create a main panel to hold form components
+        JPanel formPanel = new JPanel(null);
+        formPanel.setOpaque(false);
+        formPanel.setBounds(20, 80, getWidth() - 40, 390);
+        add(formPanel);
 
-        // getWidth() returns us the width of our frame which is about 420
-        usernameLabel.setBounds(20, 120, getWidth() - 30, 24);
+        // Username label with improved style
+        JLabel usernameLabel = new JLabel("Username");
+        usernameLabel.setBounds(10, 10, formPanel.getWidth() - 20, 24);
+        usernameLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        usernameLabel.setForeground(TEXT_COLOR);
+        formPanel.add(usernameLabel);
 
-        usernameLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
-        add(usernameLabel);
-
-        // create username field
+        // Styled username field
         JTextField usernameField = new JTextField();
-        usernameField.setBounds(20, 160, getWidth() - 50, 40);
-        usernameField.setFont(new Font("Dialog", Font.PLAIN, 28));
-        add(usernameField);
+        usernameField.setBounds(10, 40, formPanel.getWidth() - 20, 40);
+        usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        usernameField.setBackground(FIELD_BACKGROUND);
+        usernameField.setForeground(DARK_PURPLE);
+        usernameField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(ACCENT_COLOR, 1, true),
+                new EmptyBorder(5, 10, 5, 10)));
+        formPanel.add(usernameField);
 
-        // create password label
-        JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 220, getWidth() - 50, 24);
-        passwordLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
-        add(passwordLabel);
+        // Password label with improved style
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setBounds(10, 90, formPanel.getWidth() - 20, 24);
+        passwordLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        passwordLabel.setForeground(TEXT_COLOR);
+        formPanel.add(passwordLabel);
 
-        // create password field
+        // Styled password field
         JPasswordField passwordField = new JPasswordField();
-        passwordField.setBounds(20, 260, getWidth() - 50, 40);
-        passwordField.setFont(new Font("Dialog", Font.PLAIN, 28));
-        add(passwordField);
+        passwordField.setBounds(10, 120, formPanel.getWidth() - 20, 40);
+        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        passwordField.setBackground(FIELD_BACKGROUND);
+        passwordField.setForeground(DARK_PURPLE);
+        passwordField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(ACCENT_COLOR, 1, true),
+                new EmptyBorder(5, 10, 5, 10)));
+        formPanel.add(passwordField);
 
-        // re-type password label
-        JLabel rePasswordLabel = new JLabel("Re-type Password:");
-        rePasswordLabel.setBounds(20, 320, getWidth() - 50, 40);
-        rePasswordLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
-        add(rePasswordLabel);
+        // Re-type password label
+        JLabel rePasswordLabel = new JLabel("Re-type Password");
+        rePasswordLabel.setBounds(10, 170, formPanel.getWidth() - 20, 24);
+        rePasswordLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        rePasswordLabel.setForeground(TEXT_COLOR);
+        formPanel.add(rePasswordLabel);
 
-        // create re-type password field
+        // Styled re-type password field
         JPasswordField rePasswordField = new JPasswordField();
-        rePasswordField.setBounds(20, 360, getWidth() - 50, 40);
-        rePasswordField.setFont(new Font("Dialog", Font.PLAIN, 28));
-        add(rePasswordField);
+        rePasswordField.setBounds(10, 200, formPanel.getWidth() - 20, 40);
+        rePasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        rePasswordField.setBackground(FIELD_BACKGROUND);
+        rePasswordField.setForeground(DARK_PURPLE);
+        rePasswordField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(ACCENT_COLOR, 1, true),
+                new EmptyBorder(5, 10, 5, 10)));
+        formPanel.add(rePasswordField);
 
-        // create register button
-        JButton registerButton = new JButton("Register");
-        registerButton.setBounds(20, 460, getWidth() - 50, 40);
-        registerButton.setFont(new Font("Dialog", Font.BOLD, 20));
+        // Stylish register button with hover effect
+        JButton registerButton = new JButton("REGISTER");
+        registerButton.setBounds(10, 270, formPanel.getWidth() - 20, 45);
+        registerButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        registerButton.setForeground(TEXT_COLOR);
+        registerButton.setBackground(ACCENT_COLOR);
+        registerButton.setFocusPainted(false);
+        registerButton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        registerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        // Add hover effect
+        registerButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                registerButton.setBackground(DARK_PURPLE);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                registerButton.setBackground(ACCENT_COLOR);
+            }
+        });
+        
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,14 +158,35 @@ public class RegisterGui extends BaseFrame{
                 }
             }
         });
-        add(registerButton);
+        formPanel.add(registerButton);
 
-        // create login label
-        JLabel loginLabel = new JLabel("<html><a href=\"#\">Have an account? Sign-in here</a></html>");
-        loginLabel.setBounds(0, 510, getWidth() - 10, 30);
-        loginLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        // User requirements hint label
+        JLabel hintLabel = new JLabel("<html><small>Username must be at least 6 characters</small></html>");
+        hintLabel.setBounds(10, 320, formPanel.getWidth() - 20, 20);
+        hintLabel.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+        hintLabel.setForeground(new Color(230, 230, 255));
+        formPanel.add(hintLabel);
+
+        // Create login label with stylish look
+        JLabel loginLabel = new JLabel("<html><a style='color:#E0E0FF;'>Have an account? Sign-in here</a></html>");
+        loginLabel.setBounds(0, 480, getWidth() - 10, 30);
+        loginLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        loginLabel.setForeground(TEXT_COLOR);
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        loginLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Add hover effect
         loginLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                loginLabel.setText("<html><a style='color:#FFC0FF;'>Have an account? Sign-in here</a></html>");
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                loginLabel.setText("<html><a style='color:#E0E0FF;'>Have an account? Sign-in here</a></html>");
+            }
+            
             @Override
             public void mouseClicked(MouseEvent e) {
                 // dispose of this gui
@@ -133,7 +199,7 @@ public class RegisterGui extends BaseFrame{
         add(loginLabel);
     }
 
-    private boolean validateUserInput(String username, String password, String rePassword){
+    private boolean validateUserInput(String username, String password, String rePassword) {
         // all fields must have a value
         if(username.length() == 0 || password.length() == 0 || rePassword.length() == 0) return false;
 
@@ -146,19 +212,30 @@ public class RegisterGui extends BaseFrame{
         // passes validation
         return true;
     }
+    
+    // Inner class for gradient background
+    private class GradientPanel extends JPanel {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            
+            int w = getWidth();
+            int h = getHeight();
+            
+            // Create gradient from dark to light purple
+            GradientPaint gradient = new GradientPaint(0, 0, DARK_PURPLE, 0, h, LIGHT_PURPLE);
+            g2d.setPaint(gradient);
+            g2d.fillRect(0, 0, w, h);
+            
+            // Add a subtle pattern overlay
+            g2d.setColor(new Color(255, 255, 255, 15));
+            for (int i = 0; i < h; i += 5) {
+                g2d.drawLine(0, i, w, i);
+            }
+            
+            g2d.dispose();
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
