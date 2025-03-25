@@ -32,7 +32,7 @@ Installation
 Clone the Repository:
 Copy code
 ```
-git clone https://github.com/your-username/bank-app.git
+git clone https://github.com/smokemoha/bank-app.git
 ```
 Configure the Database:
 
